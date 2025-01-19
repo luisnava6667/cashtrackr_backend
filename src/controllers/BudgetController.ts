@@ -1,13 +1,12 @@
 import { Request, Response } from "express";
 import Budget from "../models/Budget";
+import Expense from "../models/Expense";
 
 export class BudgetController {
   static getAll = async (req: Request, res: Response) => {
     try {
       const budgets = await Budget.findAll({
-        order:[
-            ['createdAt', 'DESC']
-        ],
+        order: [["createdAt", "DESC"]],
 
         // TODO: Filtrar  por el usuario autenticado
       });
@@ -32,10 +31,24 @@ export class BudgetController {
     }
   };
 
-  static getById = async (req: Request, res: Response) => {};
+  static getById = async (req: Request, res: Response) => {
+    const budget = await Budget.findByPk(req.budget.id, {
+      include: [Expense],
+    });
 
-  static updateById = async (req: Request, res: Response) => {};
+    res.json(budget);
+  };
 
-  static deleteById = async (req: Request, res: Response) => {};
+  static updateById = async (req: Request, res: Response) => {
+    await req.budget.update(req.body);
+
+    res.json("Presupuesto actualizado correctamente");
+  };
+
+  static deleteById = async (req: Request, res: Response) => {
+    await req.budget.destroy();
+
+    res.json("Presupuesto eliminado correctamente");
+  };
 }
 
