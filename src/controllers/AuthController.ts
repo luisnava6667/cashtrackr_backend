@@ -100,7 +100,7 @@ export class AuthController {
   };
 
   static forgotPassword = async (req: Request, res: Response) => {
-        const { email } = req.body;
+    const { email } = req.body;
 
     const user = await User.findOne({ where: { email } });
 
@@ -114,18 +114,59 @@ export class AuthController {
 
     user.token = generateToken();
 
-    await user.save()
+    await user.save();
 
     await AuthEmail.sendPasswordResetToken({
       name: user.name,
       email: user.email,
       token: user.token,
     });
-    
-res.json("Revisa tu email para instrucciones");
+
+    res.json("Revisa tu email para instrucciones");
+  };
+
+  static validatetoken = async (req: Request, res: Response) => {
+    const { token } = req.body;
+
+    const tokenExists = await User.findOne({ where: { token } });
+
+    if (!tokenExists) {
+      const error = new Error("Token no válido");
+
+      res.status(404).json({ error: error.message });
+
+      return;
+    }
+
+    res.json(token);
+  };
+
+  static resetPasswordWhithToken = async (req: Request, res: Response) => {
+    const { token } = req.params;
+
+    const { password } = req.body;
+
+    const user = await User.findOne({ where: { token } });
+
+    if (!user) {
+      const error = new Error("Token no válido");
+
+      res.status(404).json({ error: error.message });
+
+      return;
+    }
+
+    user.password = await hasPassword(password);
+
+    user.token = null;
+
+    user.save();
+
+    res.json("El password se modificó correctamente");
+  };
+
+  static user = async (req: Request, res: Response) => {
+    res.json(req.user);
   };
 }
-
-
-
 
