@@ -3,6 +3,7 @@ import { body } from "express-validator";
 import { BudgetController } from "../controllers/BudgetController";
 import { handleInputErrors } from "../middleware/validation";
 import {
+  hasAccess,
   validateBudgetExist,
   validateBudgetId,
   validateBudgetInput,
@@ -13,12 +14,15 @@ import {
   validateExpenseId,
   validateExpenseInput,
 } from "../middleware/expense";
+import { authenticate } from "../middleware/auth";
 
 const router = Router();
 
+router.use(authenticate);
+
 router.param("budgetId", validateBudgetId);
 router.param("budgetId", validateBudgetExist);
-
+router.param("budgetId", hasAccess);
 router.param("expenseId", validateExpenseId);
 router.param("expenseId", validateExpenseExist);
 
@@ -64,4 +68,5 @@ router.put(
 router.delete("/:budgetId/expenses/:expenseId", ExpensesController.deleteById);
 
 export default router;
+
 
