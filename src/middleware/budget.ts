@@ -90,7 +90,5 @@ export function hasAccess(req: Request, res: Response, next: NextFunction) {
     return;
   }
 
-  
   next();
 }
-

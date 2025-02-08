@@ -152,4 +152,3 @@ describe("ExpensesController.deleteById", () => {
     expect(expenseMock.destroy).toHaveBeenCalledTimes(1);
   });
 });
-

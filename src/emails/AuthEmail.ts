@@ -37,4 +37,3 @@ export class AuthEmail {
     console.log("Mensaje enviado", email.messageId);
   };
 }
-

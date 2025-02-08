@@ -32,4 +32,3 @@ app.use("/api/budgets", budgetRouter);
 app.use("/api/auth", authRouter);
 
 export default app;
-

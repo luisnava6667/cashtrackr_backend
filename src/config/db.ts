@@ -20,4 +20,3 @@ export const db = new Sequelize(dbUrl, {
     },
   },
 });
-

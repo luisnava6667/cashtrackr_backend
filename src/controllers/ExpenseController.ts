@@ -34,4 +34,3 @@ export class ExpensesController {
     res.json("Gasto eliminado correctamente");
   };
 }
-
