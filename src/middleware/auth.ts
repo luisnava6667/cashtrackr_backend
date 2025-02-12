@@ -49,4 +49,3 @@ export const authenticate = async (
     res.status(500).json({ error: "Token no válido" });
   }
 };
-

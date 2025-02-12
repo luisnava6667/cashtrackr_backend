@@ -78,4 +78,3 @@ export const validateExpenseExist = async (
     res.status(500).json({ error: "Hubo un error" });
   }
 };
-

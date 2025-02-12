@@ -6,14 +6,14 @@ import budgetRouter from "./routes/budgetRouter";
 import authRouter from "./routes/authRouter";
 import { limiter } from "./config/limiter";
 
-async function connectDB() {
+export async function connectDB() {
   try {
     await db.authenticate();
     db.sync();
-    console.log(colors.green.bold("Conexion exitosa a la base de datos"));
+    // console.log(colors.green.bold("Conexion exitosa a la base de datos"));
   } catch (error) {
     // console.log(error);
-    console.log(colors.red.bold("Fallo la conexión a la base de datos"));
+    // console.log(colors.red.bold("Fallo la conexión a la base de datos"));
   }
 }
 
@@ -32,4 +32,3 @@ app.use("/api/budgets", budgetRouter);
 app.use("/api/auth", authRouter);
 
 export default app;
-
