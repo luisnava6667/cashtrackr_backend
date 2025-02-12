@@ -24,7 +24,13 @@ export class AuthController {
 
       user.password = await hasPassword(password);
 
-      user.token = generateToken();
+      const token = generateToken();
+
+      user.token = token;
+
+      if (process.env.NODE_ENV !== "production") {
+        globalThis.cashTrackrConfirmationToken = token;
+      }
 
       await user.save();
 
