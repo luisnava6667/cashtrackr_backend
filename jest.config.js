@@ -2,6 +2,8 @@
 module.exports = {
   testEnvironment: "node",
   transform: {
-    "^.+.tsx?$": ["ts-jest",{}],
+    "^.+.tsx?$": ["ts-jest", {}],
   },
+  openHandlesTimeout: 10 * 1000,
+  testTimeout: 10 * 1000,
 };

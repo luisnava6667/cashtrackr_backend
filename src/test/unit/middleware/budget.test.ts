@@ -108,10 +108,8 @@ describe("Budget Middleware - hasAccess", () => {
 
     expect(next).not.toHaveBeenCalled();
 
-    expect(res.statusCode).toBe(401)
+    expect(res.statusCode).toBe(401);
 
     expect(res._getJSONData()).toEqual({ error: "Acción no válida" });
   });
 });
-
-

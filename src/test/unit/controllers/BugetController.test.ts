@@ -320,5 +320,3 @@ describe("BudgetController.deleteById", () => {
     expect(budgetMock.destroy).toHaveBeenCalledTimes(1);
   });
 });
-
-

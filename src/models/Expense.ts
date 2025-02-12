@@ -33,4 +33,3 @@ class Expense extends Model {
 }
 
 export default Expense;
-

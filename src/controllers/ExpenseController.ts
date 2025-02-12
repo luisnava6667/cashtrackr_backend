@@ -6,7 +6,7 @@ export class ExpensesController {
 
   static create = async (req: Request, res: Response) => {
     try {
-      const expense = new Expense(req.body);
+      const expense = await Expense.create(req.body);
 
       expense.budgetId = req.budget.id;
 
@@ -34,4 +34,3 @@ export class ExpensesController {
     res.json("Gasto eliminado correctamente");
   };
 }
-
